@@ -1,43 +1,34 @@
 package com.orangetalents.desafio.entitys;
 
-import org.hibernate.validator.constraints.br.CPF;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @NotNull
-    @NotBlank
     private String nome;
 
-    @Email
-    @NotNull
-    @NotBlank
     @Column(unique = true)
     private String email;
 
-    @CPF
-    @NotNull
-    @NotBlank
     @Column(unique = true)
     private String cpf;
 
-    @NotNull
     private LocalDate dataNascimento;
 
     public User() {}
 
-    public User(Integer id, @NotNull @NotBlank String nome, @Email @NotNull @NotBlank String email, @CPF @NotNull @NotBlank String cpf, @NotNull LocalDate dataNascimento) {
+    public User(Long id, String nome, String email, String cpf, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -45,11 +36,11 @@ public class User implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

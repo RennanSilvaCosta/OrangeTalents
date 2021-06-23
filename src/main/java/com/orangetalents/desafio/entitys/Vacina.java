@@ -1,68 +1,65 @@
 package com.orangetalents.desafio.entitys;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Vacina implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotNull
-    private String emailUser;
+	private String emailUser;
 
-    @NotBlank
-    @NotNull
-    private String nomeVacina;
+	private String nomeVacina;
 
-    @NotNull
-    private LocalDate dataAplicacao;
+	private LocalDate dataAplicacao;
 
-    private Vacina() {
-    }
+	public Vacina() {
+	}
 
-    public Vacina(Integer id, @NotNull String emailUser, @NotBlank @NotNull String nomeVacina, @NotNull LocalDate dataAplicacao) {
-        this.id = id;
-        this.emailUser = emailUser;
-        this.nomeVacina = nomeVacina;
-        this.dataAplicacao = dataAplicacao;
-    }
+	public Vacina(Long id, String emailUser, String nomeVacina, LocalDate dataAplicacao) {
+		this.id = id;
+		this.emailUser = emailUser;
+		this.nomeVacina = nomeVacina;
+		this.dataAplicacao = dataAplicacao;
+	}
 
-    public String getEmailUser() {
-        return emailUser;
-    }
+	public String getEmailUser() {
+		return emailUser;
+	}
 
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
+	public void setEmailUser(String emailUser) {
+		this.emailUser = emailUser;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
+	public String getNomeVacina() {
+		return nomeVacina;
+	}
 
-    public String getNomeVacina() {
-        return nomeVacina;
-    }
+	public void setNomeVacina(String nomeVacina) {
+		this.nomeVacina = nomeVacina;
+	}
 
-    public void setNomeVacina(String nomeVacina) {
-        this.nomeVacina = nomeVacina;
-    }
+	public LocalDate getDataAplicacao() {
+		return dataAplicacao;
+	}
 
-    public LocalDate getDataAplicacao() {
-        return dataAplicacao;
-    }
-
-    public void setDataAplicacao(LocalDate dataAplicacao) {
-        this.dataAplicacao = dataAplicacao;
-    }
+	public void setDataAplicacao(LocalDate dataAplicacao) {
+		this.dataAplicacao = dataAplicacao;
+	}
 }
