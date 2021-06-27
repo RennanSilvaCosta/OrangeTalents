@@ -1,4 +1,4 @@
-package dto;
+package com.orangetalents.desafio.dto;
 
 import java.time.LocalDate;
 

@@ -1,5 +1,6 @@
 package com.orangetalents.desafio.service;
 
+import com.orangetalents.desafio.dto.UserDTO;
 import com.orangetalents.desafio.entitys.User;
 import com.orangetalents.desafio.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createNewUser(User user) {
-        return userRepository.save(user);
+    public User createNewUser(UserDTO userDTO) {
+        User user = new User(userDTO);
+    	return userRepository.save(user);
     }
 
     public boolean thisEmailExist(String email) {

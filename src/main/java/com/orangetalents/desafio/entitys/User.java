@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.orangetalents.desafio.dto.UserDTO;
+
 @Entity
 public class User implements Serializable {
 
@@ -28,6 +30,14 @@ public class User implements Serializable {
 
     public User() {}
 
+    public User(UserDTO userDTO) {
+    	this.id = userDTO.getId();
+    	this.nome = userDTO.getNome();
+    	this.email = userDTO.getEmail();
+    	this.cpf = userDTO.getCpf();
+    	this.dataNascimento = userDTO.getDataNascimento();
+    }
+    
     public User(Long id, String nome, String email, String cpf, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;

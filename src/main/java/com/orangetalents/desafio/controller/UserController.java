@@ -1,5 +1,6 @@
 package com.orangetalents.desafio.controller;
 
+import com.orangetalents.desafio.dto.UserDTO;
 import com.orangetalents.desafio.entitys.User;
 import com.orangetalents.desafio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,14 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@Valid @RequestBody User user) {
-        if (userService.thisEmailExist(user.getEmail())) {
+    public ResponseEntity<?> saveUser(@Valid @RequestBody UserDTO userDTO) {
+        if (userService.thisEmailExist(userDTO.getEmail())) {
             return ResponseEntity.badRequest().build();
         } else {
-            if (userService.thisCpfExist(user.getCpf())) {
+            if (userService.thisCpfExist(userDTO.getCpf())) {
                 return ResponseEntity.badRequest().build();
             } else {
-                User usuario = userService.createNewUser(user);
+                User usuario = userService.createNewUser(userDTO);
                 URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(usuario.getId()).toUri();
                 return ResponseEntity.created(uri).body(usuario);
             }
