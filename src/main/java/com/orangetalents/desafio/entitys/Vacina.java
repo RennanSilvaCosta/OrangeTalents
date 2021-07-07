@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "tb_vacina")
 public class Vacina implements Serializable {
 
     @Id

@@ -21,8 +21,12 @@ public class VacinaService {
     @Autowired
     private UserRepository userRepository;
 
-    public Vacina createNewVacina(Vacina vacina) {
-        return vacinaRepository.save(vacina);
+    public VacinaDTO createNewVacina(VacinaInsertDTO vacinaInsertDTO) {
+        VacinaDTO vacinaDTO = validateUser(vacinaInsertDTO);
+        vacinaDTO.setNomeVacina(vacinaInsertDTO.getNomeVacina());
+        vacinaDTO.setDataAplicacao(vacinaInsertDTO.getDataAplicacao());
+        Vacina vacina = new Vacina(vacinaDTO);
+        return new VacinaDTO(vacinaRepository.save(vacina));
     }
 
     private VacinaDTO validateUser(VacinaInsertDTO vacina) {

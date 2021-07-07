@@ -12,7 +12,6 @@ import com.orangetalents.desafio.entitys.User;
 
 public class UserDTO {
 
-	@NotNull
 	private Long id;
 
 	@NotNull

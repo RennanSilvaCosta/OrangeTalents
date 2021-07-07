@@ -1,5 +1,7 @@
 package com.orangetalents.desafio.controller;
 
+import com.orangetalents.desafio.dto.VacinaDTO;
+import com.orangetalents.desafio.dto.VacinaInsertDTO;
 import com.orangetalents.desafio.entitys.Vacina;
 import com.orangetalents.desafio.service.VacinaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,9 @@ public class VacinaController {
     private VacinaService vacinaService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> saveVacina(@Valid @RequestBody Vacina vacina) {
-        Vacina vac = vacinaService.createNewVacina(vacina);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(vacina.getId()).toUri();
+    public ResponseEntity<?> saveVacina(@Valid @RequestBody VacinaInsertDTO vacina) {
+        VacinaDTO vac = vacinaService.createNewVacina(vacina);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(vac.getId()).toUri();
         return ResponseEntity.created(uri).body(vacina);
     }
 }
