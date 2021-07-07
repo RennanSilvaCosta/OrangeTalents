@@ -22,12 +22,8 @@ public class VacinaController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> saveVacina(@Valid @RequestBody Vacina vacina) {
-        if (vacinaService.validateUser(vacina)){
-            Vacina vac = vacinaService.createNewVacina(vacina);
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(vacina.getId()).toUri();
-            return ResponseEntity.created(uri).body(vacina);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        Vacina vac = vacinaService.createNewVacina(vacina);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(vacina.getId()).toUri();
+        return ResponseEntity.created(uri).body(vacina);
     }
 }

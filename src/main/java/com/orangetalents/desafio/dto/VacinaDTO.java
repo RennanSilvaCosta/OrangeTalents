@@ -11,61 +11,66 @@ import javax.validation.constraints.Email;
 
 public class VacinaDTO {
 
-	@NotNull
-	private Long id;
+    private Long id;
 
-	@Email
-	@NotBlank
-	@NotNull
-	private String emailUser;
+    @NotNull
+    private UserDTO userDTO;
 
-	@NotBlank
-	@NotNull
-	private String nomeVacina;
+    @NotBlank
+    @NotNull
+    private String nomeVacina;
 
-	@NotNull
-	private LocalDate dataAplicacao;
+    @NotNull
+    private LocalDate dataAplicacao;
 
-	public VacinaDTO() {
-	}
+    public VacinaDTO() {
+    }
 
-	public VacinaDTO(Vacina vacina) {
-		this.id = vacina.getId();
-		this.emailUser = vacina.getEmailUser();
-		this.nomeVacina = vacina.getNomeVacina();
-		this.dataAplicacao = vacina.getDataAplicacao();
-	}
+    public VacinaDTO(Long id, UserDTO userDTO, String nomeVacina, LocalDate dataAplicacao) {
+        this.id = id;
+        this.userDTO = userDTO;
+        this.nomeVacina = nomeVacina;
+        this.dataAplicacao = dataAplicacao;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public VacinaDTO(Vacina vac) {
+        UserDTO user = new UserDTO(vac.getUsuario());
+        this.id = vac.getId();
+        this.userDTO = user;
+        this.nomeVacina = vac.getNomeVacina();
+        this.dataAplicacao = vac.getDataAplicacao();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getEmailUser() {
-		return emailUser;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setEmailUser(String emailUser) {
-		this.emailUser = emailUser;
-	}
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
 
-	public String getNomeVacina() {
-		return nomeVacina;
-	}
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
 
-	public void setNomeVacina(String nomeVacina) {
-		this.nomeVacina = nomeVacina;
-	}
+    public String getNomeVacina() {
+        return nomeVacina;
+    }
 
-	public LocalDate getDataAplicacao() {
-		return dataAplicacao;
-	}
+    public void setNomeVacina(String nomeVacina) {
+        this.nomeVacina = nomeVacina;
+    }
 
-	public void setDataAplicacao(LocalDate dataAplicacao) {
-		this.dataAplicacao = dataAplicacao;
-	}
+    public LocalDate getDataAplicacao() {
+        return dataAplicacao;
+    }
+
+    public void setDataAplicacao(LocalDate dataAplicacao) {
+        this.dataAplicacao = dataAplicacao;
+    }
 
 }
