@@ -23,17 +23,9 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@Valid @RequestBody UserDTO userDTO) {
-        if (userService.thisEmailExist(userDTO.getEmail())) {
-            return ResponseEntity.badRequest().build();
-        } else {
-            if (userService.thisCpfExist(userDTO.getCpf())) {
-                return ResponseEntity.badRequest().build();
-            } else {
-                User usuario = userService.createNewUser(userDTO);
-                URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(usuario.getId()).toUri();
-                return ResponseEntity.created(uri).body(usuario);
-            }
-        }
+        UserDTO usuario = userService.createNewUser(userDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(usuario.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuario);
     }
 
 }

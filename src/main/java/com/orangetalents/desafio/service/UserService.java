@@ -6,24 +6,34 @@ import com.orangetalents.desafio.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    public User createNewUser(UserDTO userDTO) {
-        User user = new User(userDTO);
-    	return userRepository.save(user);
+    public UserDTO createNewUser(UserDTO dto) {
+        thisEmailExist(dto.getEmail());
+        thisCpfExist(dto.getCpf());
+        User u = new User(dto);
+        return new UserDTO(userRepository.save(u));
     }
 
-    public boolean thisEmailExist(String email) {
-        User user = userRepository.findByEmail(email);
-        return user != null;
+    private void thisEmailExist(String email) {
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
+        if (user.isPresent()) {
+            //TODO: lancar exceção caso o email exista, pois o email deve ser unico.
+            System.out.println("Email já existe");
+        }
     }
 
-    public boolean thisCpfExist(String cpf) {
-        User user = userRepository.findByCpf(cpf);
-        return user != null;
+    private void thisCpfExist(String cpf) {
+        Optional<User> user = Optional.ofNullable(userRepository.findByCpf(cpf));
+        if (user.isPresent()) {
+            //TODO: lancar exceção caso o CPF exista, pois o CPF deve ser unico.
+            System.out.println("CPF já existe");
+        }
     }
 }
